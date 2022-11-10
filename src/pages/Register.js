@@ -30,7 +30,7 @@ const Register = () => {
                 <Form.Label className="fw-bold">Name</Form.Label>
                 <Form.Control
                   type={"text"}
-                  placeholder="Enetr name"
+                  placeholder="Enter name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
@@ -40,7 +40,7 @@ const Register = () => {
                 <Form.Label className="fw-bold">Email</Form.Label>
                 <Form.Control
                  type={"text"}
-                 placeholder="Enetr email"
+                 placeholder="Enter email"
                  name="email"
                  value={formData.email}
                  onChange={handleChange}
@@ -50,7 +50,7 @@ const Register = () => {
                 <Form.Label className="fw-bold">Password</Form.Label>
                 <Form.Control
                   type={"password"}
-                  placeholder="Enetr password"
+                  placeholder="Enter password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}

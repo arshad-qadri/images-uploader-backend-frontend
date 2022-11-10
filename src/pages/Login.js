@@ -29,7 +29,7 @@ const Login = () => {
                 <Form.Label className="fw-bold">Email</Form.Label>
                 <Form.Control
                   type="email"
-                  placeholder="Enetr email"
+                  placeholder="Enter email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
@@ -39,7 +39,7 @@ const Login = () => {
                 <Form.Label className="fw-bold">Password</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enetr password"
+                  placeholder="Enter password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
