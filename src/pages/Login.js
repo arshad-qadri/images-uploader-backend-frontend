@@ -39,7 +39,7 @@ const Login = () => {
                 <Form.Label className="fw-bold">Password</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter password please1"
+                  placeholder="Enter password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
