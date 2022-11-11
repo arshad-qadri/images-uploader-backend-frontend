@@ -1,12 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 const Layout = ({ children }) => {
-  const headRef = useRef();
-  const footerRef = useRef();
   const nevigate = useNavigate();
   const [height, setHeight] = useState(0)
   useEffect(() => {

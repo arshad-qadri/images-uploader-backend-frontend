@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Button, Col, Row ,Form} from "react-bootstrap";
-import {useDispatch} from "react-redux"
+import { Button, Col, Row, Form } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../redux/reducers/register";
 
@@ -10,21 +10,21 @@ const Register = () => {
     email: "",
     password: "",
   });
-  const dispatch = useDispatch()
-  const push = useNavigate()
+  const dispatch = useDispatch();
+  const push = useNavigate();
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const handleFormSubmit = (e)=>{
-    e.preventDefault()
-    dispatch(registerUser({formData,push}))
-
-  }
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    dispatch(registerUser({ formData, push }));
+  };
   return (
     <>
       <div className="h-100 ">
         <Row className="h-100 py-5 justify-content-center align-items-center">
           <Col lg={6} sm={12} className="mx-auto">
+            <h3 className="text-center mb-5">Register</h3>
             <Form onSubmit={handleFormSubmit}>
               <Form.Group className="mb-3">
                 <Form.Label className="fw-bold">Name</Form.Label>
@@ -39,11 +39,11 @@ const Register = () => {
               <Form.Group className="mb-3">
                 <Form.Label className="fw-bold">Email</Form.Label>
                 <Form.Control
-                 type={"text"}
-                 placeholder="Enter email"
-                 name="email"
-                 value={formData.email}
-                 onChange={handleChange}
+                  type={"text"}
+                  placeholder="Enter email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                 />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -57,7 +57,7 @@ const Register = () => {
                 />
               </Form.Group>
               <Button type="submit" variant="dark" className="fw-bold">
-              Sign up
+                Sign up
               </Button>
             </Form>
           </Col>

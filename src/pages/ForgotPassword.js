@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../redux/reducers/login";
 import Form from "react-bootstrap/Form";
 import { Button, Col, Row } from "react-bootstrap";
+import { forgPAssword } from "../redux/reducers/forgotPassword";
 
-const Login = () => {
+const ForgotPassword = () => {
   const nevigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
-    password: "",
+    newPassword: "",
+    repreateNewPassword: "",
   });
   const dispatch = useDispatch();
   const handleChange = (e) => {
@@ -17,14 +19,15 @@ const Login = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser({ formData, push: nevigate }));
+    // console.log("form",formData);
+    dispatch(forgPAssword({ fData:{email:formData.email, newPassword:formData.newPassword}, push: nevigate }));
   };
   return (
     <>
       <div className="h-100 ">
         <Row className="h-100 py-5 justify-content-center align-items-center">
           <Col lg={6} sm={12} className="mx-auto ">
-            <h3 className="text-center mb-5">Login</h3>
+            <h3 className="text-center mb-5">Reset Password</h3>
             <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3">
                 <Form.Label className="fw-bold">Email</Form.Label>
@@ -37,21 +40,28 @@ const Login = () => {
                 />
               </Form.Group>
               <Form.Group className="mb-3">
-                <Form.Label className="fw-bold">Password</Form.Label>
+                <Form.Label className="fw-bold">New Password</Form.Label>
                 <Form.Control
-                  type="text"
-                  placeholder="Enter password"
-                  name="password"
-                  value={formData.password}
+                  type="password"
+                  placeholder="Enter new password"
+                  name="newPassword"
+                  value={formData.newPassword}
                   onChange={handleChange}
                 />
               </Form.Group>
-              <div className="d-flex justify-content-between align-items-center">
-                <Button type="submit" variant="dark" className="fw-bold">
-                  Login
-                </Button>
-                <Link to="/forgot-password">Forgot password</Link>
-              </div>
+              <Form.Group className="mb-3">
+                <Form.Label className="fw-bold">Repeat New Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Re-Enter new password"
+                  name="repreateNewPassword"
+                  value={formData.repreateNewPassword}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Button type="submit" variant="dark" className="fw-bold">
+                Submit
+              </Button>
             </Form>
           </Col>
         </Row>
@@ -60,4 +70,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;
