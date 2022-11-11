@@ -11,7 +11,7 @@ const LoginHeader = () => {
       <Navbar bg="dark" expand="lg">
         <Container>
           <Link to={"/"} className="text-light nav-link" > <h4>Upload Images</h4> </Link>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className="bg-light"/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               <Link to={"/login"} className="text-light nav-link fw-bold pb-0" style={{borderBottom:location.pathname==="/login"? "2px solid #fff":"none"}} >Login</Link>

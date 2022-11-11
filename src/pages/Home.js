@@ -39,7 +39,7 @@ export default function Home() {
           {imageIds && imageIds.length > 0 ? (
             imageIds.map((imageId, index) => (
               <div
-                className="m-2 image-hover overflow-hidden"
+                className="m-2 image-hover overflow-hidden mx-auto"
                 key={index}
                 style={{ width: "300px", cursor: "pointer" }}
                 onClick={() => handleClick(imageId.image_url)}

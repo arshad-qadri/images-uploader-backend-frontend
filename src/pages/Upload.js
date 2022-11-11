@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { uploadImages } from "../redux/reducers/uploadImage";
 import { useDispatch } from "react-redux";
-import { Button, Form } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 
 export default function Upload() {
   const [fileInputState, setFileInputState] = useState("");
@@ -29,64 +29,65 @@ export default function Upload() {
     e.preventDefault();
     const auth = JSON.parse(localStorage.getItem("userLogin"));
 
-    if (!selectedFile) return;
-    const reader = new FileReader();
-    reader.readAsDataURL(selectedFile);
-    reader.onloadend = () => {
-      if (auth) {
-        dispstch(
-          uploadImages({ source: reader.result, id: auth._id, push: nevigate })
-        );
-      }
-    };
-    reader.onerror = () => {
-      console.error("AHHHHHHHH!!");
-    };
+    if (previewSource && fileInputState) {
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedFile);
+      reader.onloadend = () => {
+        if (auth) {
+          // if(previewSource && fileInputState){
+
+          dispstch(
+            uploadImages({
+              source: reader.result,
+              id: auth._id,
+              push: nevigate,
+            })
+          );
+        }
+      };
+      reader.onerror = () => {
+        console.error("AHHHHHHHH!!");
+      };
+    } else {
+      alert("Please select image !");
+    }
   };
   return (
     <div className="py-4">
-      <Form onSubmit={handleSubmitFile}>
-        <Form.Group className="mb-3">
-          <Form.Control
-            id="fileInput"
-            type="file"
-            name="image"
-            onChange={handleFileInputChange}
-            value={fileInputState}
-          />
+      <Row>
+        <Col lg={6} md={6} sm={12} xs={12}>
+          <Form onSubmit={handleSubmitFile}>
+            <Form.Group className="mb-3">
+              <Form.Control
+                id="fileInput"
+                type="file"
+                name="image"
+                onChange={handleFileInputChange}
+                value={fileInputState}
+              />
 
-          <Button
-            variant="light"
-            className="my-3 mx-2"
-            onClick={() => {
-              setFileInputState("");
-              setPreviewSource("");
-            }}
-          >
-            Cancel
-          </Button>
-          <Button variant="dark" type="submit" className="my-3">
-            Submit
-          </Button>
-        </Form.Group>
-      </Form>
-      {/* <form onSubmit={handleSubmitFile} className="form">
-                <input
-                    id="fileInput"
-                    type="file"
-                    name="image"
-                    onChange={handleFileInputChange}
-                    value={fileInputState}
-                    className="form-input d-none"
-                />
-                <label htmlFor='fileInput' className='cursor-pointer w-100 boder-1'> <span>Browse image</span> </label>
-                <button className="btn" type="submit">
-                    Submit
-                </button>
-            </form> */}
-      {previewSource && (
-        <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
-      )}
+              <Button
+                variant="light"
+                className="my-3 mx-2"
+                onClick={() => {
+                  setFileInputState("");
+                  setPreviewSource("");
+                }}
+              >
+                Cancel
+              </Button>
+              <Button variant="dark" type="submit" className="my-3">
+                Submit
+              </Button>
+            </Form.Group>
+          </Form>
+        </Col>
+        <Col lg={6} md={6} sm={12} xs={12}>
+          {previewSource && (
+            <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
+          )}
+        </Col>
+      </Row>
     </div>
   );
 }

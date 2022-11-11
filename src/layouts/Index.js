@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
@@ -8,24 +8,29 @@ const Layout = ({ children }) => {
   const headRef = useRef();
   const footerRef = useRef();
   const nevigate = useNavigate();
+  const [height, setHeight] = useState(0)
   useEffect(() => {
     const auth = JSON.parse(localStorage.getItem("userLogin"));
     if (!auth) {
       alert("You need to login first !")
       nevigate("/login");
     } 
+    const head = document.getElementById("header").offsetHeight
+    const footer = document.getElementById("footer").offsetHeight
+    setHeight(head + footer)
     // eslint-disable-next-line
   }, []);
   return (
     <div>
-      <div ref={headRef}>
+      <div  id="header">
         <Header />
       </div>
       {/* eslint-disable-next-line */}
       <div
         style={{
           height: `calc(100vh - ${
-            85
+            height
+            // 85
             // headRef?.current?.offsetHeight + footerRef?.current?.offsetHeight
           }px)`,
         }}
@@ -34,7 +39,7 @@ const Layout = ({ children }) => {
         <Container className="h-100">{children}</Container>
       </div>
 
-      <div ref={footerRef}>
+      <div id="footer">
         <Footer />
       </div>
     </div>
