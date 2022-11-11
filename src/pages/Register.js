@@ -34,6 +34,7 @@ const Register = () => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -44,6 +45,7 @@ const Register = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -54,6 +56,7 @@ const Register = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
+                  required
                 />
               </Form.Group>
               <Button type="submit" variant="dark" className="fw-bold">

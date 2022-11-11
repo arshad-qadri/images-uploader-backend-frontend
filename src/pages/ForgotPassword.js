@@ -19,8 +19,21 @@ const ForgotPassword = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("form",formData);
-    dispatch(forgPAssword({ fData:{email:formData.email, newPassword:formData.newPassword}, push: nevigate }));
+    const { email, newPassword, repreateNewPassword } = formData;
+    if (email && newPassword && repreateNewPassword) {
+      if (newPassword !== repreateNewPassword) {
+        alert("Password not match !");
+      } else {
+        dispatch(
+          forgPAssword({
+            fData: { email: formData.email, newPassword: formData.newPassword },
+            push: nevigate,
+          })
+        );
+      }
+    } else {
+      alert("All fields are required !");
+    }
   };
   return (
     <>
@@ -37,6 +50,7 @@ const ForgotPassword = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -47,6 +61,7 @@ const ForgotPassword = () => {
                   name="newPassword"
                   value={formData.newPassword}
                   onChange={handleChange}
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-3">
@@ -57,6 +72,7 @@ const ForgotPassword = () => {
                   name="repreateNewPassword"
                   value={formData.repreateNewPassword}
                   onChange={handleChange}
+                  required
                 />
               </Form.Group>
               <Button type="submit" variant="dark" className="fw-bold">

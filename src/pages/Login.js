@@ -34,16 +34,18 @@ const Login = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label className="fw-bold">Password</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="password"
                   placeholder="Enter password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
+                  required
                 />
               </Form.Group>
               <div className="d-flex justify-content-between align-items-center">
