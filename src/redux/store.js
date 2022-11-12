@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import deleteImage from "./reducers/deleteImage";
 import forgotPassword from "./reducers/forgotPassword";
 
 import getImageSlice from "./reducers/getImageReducer";
@@ -12,7 +13,8 @@ const store = configureStore({
     images: getImageSlice.reducer,
     register: register.reducer,
     login: login.reducer,
-    forgotPassword: forgotPassword.reducer
+    forgotPassword: forgotPassword.reducer,
+    deleteImage:deleteImage.reducer
   },
 });
 

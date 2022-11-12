@@ -62,6 +62,7 @@ export default function Upload() {
                 id="fileInput"
                 type="file"
                 name="image"
+                accept="image/png, image/gif, image/jpeg"
                 onChange={handleFileInputChange}
                 value={fileInputState}
               />

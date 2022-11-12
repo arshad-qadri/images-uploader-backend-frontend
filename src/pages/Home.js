@@ -5,6 +5,7 @@ import { getImages } from "../redux/reducers/getImageReducer";
 import Loader from "../components/Loader";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { delImage } from "../redux/reducers/deleteImage";
 
 export default function Home() {
   const [imageIds, setImageIds] = useState();
@@ -25,10 +26,19 @@ export default function Home() {
 
   const handleClick = (url) => {
     window.open(
-      `http://res.cloudinary.com/dsdcsntrd/image/upload/c_scale/v1/${url}`,
+      `${url}`,
       "_blank"
     );
   };
+
+  const handleDelete = ({image_url, _id,userId}) =>{
+    const cnf = window.confirm("Are you sure to delete this image?")
+    console.log("cnf",cnf);
+    // console.log(da);
+    if(cnf){
+      dispatch(delImage({public_id:image_url,id:_id,userId}))
+    }
+  }
 
   return (
     <div className="h-100">
@@ -42,15 +52,20 @@ export default function Home() {
                 className="m-2 image-hover overflow-hidden mx-auto"
                 key={index}
                 style={{ width: "300px", cursor: "pointer" }}
-                onClick={() => handleClick(imageId.image_url)}
+               
               >
                 <Image
                   cloudName={"dsdcsntrd"}
-                  publicId={imageId.image_url}
+                  publicId={imageId.public_id}
                   width="300"
                   height="170"
                   crop="scale"
+                  onClick={() => handleClick(imageId.image_url)}
                 />
+                <div className="buttons"> 
+                <Button className="cust-btn-sty fw-bold">Download</Button>
+                <Button className="cust-btn-sty fw-bold" onClick={()=>handleDelete(imageId)}>Delete</Button>
+                </div>
               </div>
             ))
           ) : (
