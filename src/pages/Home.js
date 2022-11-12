@@ -31,12 +31,12 @@ export default function Home() {
     );
   };
 
-  const handleDelete = ({image_url, _id,userId}) =>{
+  const handleDelete = ({public_id, _id,userId}) =>{
     const cnf = window.confirm("Are you sure to delete this image?")
     console.log("cnf",cnf);
     // console.log(da);
     if(cnf){
-      dispatch(delImage({public_id:image_url,id:_id,userId}))
+      dispatch(delImage({public_id,id:_id,userId}))
     }
   }
 
