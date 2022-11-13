@@ -34,7 +34,7 @@ const Layout = ({ children }) => {
         }}
        className="overflow-auto"  
       >
-        <Container className="h-100">{children}</Container>
+        <Container className="">{children}</Container>
       </div>
 
       <div id="footer">

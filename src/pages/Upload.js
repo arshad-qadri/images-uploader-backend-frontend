@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { uploadImages } from "../redux/reducers/uploadImage";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import Loader from "../components/Loader";
 
 export default function Upload() {
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState("");
   const [selectedFile, setSelectedFile] = useState();
+  const {upload} = useSelector((state)=>state)
   const nevigate = useNavigate();
   const dispstch = useDispatch();
   const handleFileInputChange = (e) => {
@@ -53,6 +55,7 @@ export default function Upload() {
     }
   };
   return (
+    upload.isLoading?<Loader/>:
     <div className="py-4">
       <Row>
         <Col lg={6} md={6} sm={12} xs={12}>
@@ -86,7 +89,7 @@ export default function Upload() {
         <Col lg={6} md={6} sm={12} xs={12}>
           {previewSource && (
             <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
-          )}
+              )}
         </Col>
       </Row>
     </div>
