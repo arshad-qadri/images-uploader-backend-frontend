@@ -1,27 +1,29 @@
-import React, { useRef } from "react";
+import React, {useEffect, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Footer from "../components/Footer";
 import LoginHeader from "../components/LoginHeader";
 
 const AuthLayouts = ({ children }) => {
-  const headRef = useRef();
-  const footerRef = useRef();
-
+  const [height, setHeight] = useState(0)
+  useEffect(() => {
+    const head = document.getElementById("header").offsetHeight
+    const footer = document.getElementById("footer").offsetHeight
+    setHeight(head + footer)
+  },[])
   return (
     <div>
-      <div id="authHeader" ref={headRef}>
+      <div id="header">
         <LoginHeader />
       </div>
       <Container
         style={{
-          height: `calc(100vh - ${85
-            // headRef?.current?.offsetHeight + footerRef?.current?.offsetHeight
+          height: `calc(100vh - ${height
           }px)`,
         }}
       >
         {children}
       </Container>
-      <div ref={footerRef}>
+      <div id="footer">
         <Footer />
       </div>
     </div>

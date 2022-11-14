@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { baseUrl } from "../../variable";
-import { getImages } from "./getImageReducer";
 
 export const delImage = createAsyncThunk(
   "images/deleteImage",
@@ -13,7 +12,7 @@ export const delImage = createAsyncThunk(
         .then((res) => {
           if (res) {
             data = res.data;
-            return dispatch(getImages(arg.userId));
+            // return dispatch(getImages(arg.userId));
           }
         })
         .catch((err) => {

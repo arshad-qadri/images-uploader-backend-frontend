@@ -32,6 +32,8 @@ export default function Home() {
     const cnf = window.confirm("Are you sure to delete this image?");
     if (cnf) {
       dispatch(delImage({ public_id, id: _id, userId }));
+    const filtered =  imageIds.filter((item)=>item._id !== _id)
+    setImageIds(filtered)
     }
   };
 
@@ -53,6 +55,7 @@ export default function Home() {
                 <img
                   src={imageId.image_url}
                   onClick={() => handleClick(imageId.image_url)}
+                  alt="user images"
                 />
                 {/* <Image
                   cloudName={"dsdcsntrd"}

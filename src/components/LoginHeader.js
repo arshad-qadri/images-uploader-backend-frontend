@@ -17,28 +17,36 @@ const LoginHeader = () => {
           />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <Link
-                to={"/login"}
-                className="text-light nav-link fw-bold pb-0"
-                style={{
-                  borderBottom:
-                    location.pathname === "/login" ? "2px solid #fff" : "none",
-                }}
-              >
-                Login
-              </Link>
-              <Link
-                to={"/register"}
-                className="text-light nav-link fw-bold pb-0"
-                style={{
-                  borderBottom:
-                    location.pathname === "/register"
-                      ? "2px solid #fff"
-                      : "none",
-                }}
-              >
-                Register
-              </Link>
+              <div  
+              className="navItem"
+              style={{
+                    borderBottom:
+                      location.pathname ==="/login"? "2px solid #fff" : "none",
+                  }}>
+                <Link
+                  to={"/login"}
+                  className="text-light nav-link fw-bold pb-0"
+                 
+                >
+                  Login
+                </Link>
+              </div>
+              <div
+              className="navItem"
+               style={{
+                    borderBottom:
+                      location.pathname === "/register"
+                        ? "2px solid #fff"
+                        : "none",
+                  }}>
+                <Link
+                  to={"/register"}
+                  className="text-light nav-link fw-bold pb-0"
+                  
+                >
+                  Register
+                </Link>
+              </div>
             </Nav>
           </Navbar.Collapse>
         </Container>
