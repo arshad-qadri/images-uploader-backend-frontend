@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import { Button, Col, Row } from "react-bootstrap";
 
 const Login = () => {
+  console.log("process===", process.env.test);
   const nevigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
