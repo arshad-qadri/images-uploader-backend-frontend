@@ -9,7 +9,7 @@ export default function Upload() {
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState("");
   const [selectedFile, setSelectedFile] = useState();
-  const {upload} = useSelector((state)=>state)
+  const { upload } = useSelector((state) => state);
   const nevigate = useNavigate();
   const dispstch = useDispatch();
   const handleFileInputChange = (e) => {
@@ -32,30 +32,36 @@ export default function Upload() {
     const auth = JSON.parse(localStorage.getItem("userLogin"));
 
     if (previewSource && fileInputState) {
-      const reader = new FileReader();
-      reader.readAsDataURL(selectedFile);
-      reader.onloadend = () => {
-        if (auth) {
-          // if(previewSource && fileInputState){
-
-          dispstch(
-            uploadImages({
-              source: reader.result,
-              id: auth._id,
-              push: nevigate,
-            })
-          );
-        }
-      };
-      reader.onerror = () => {
-        console.error("AHHHHHHHH!!");
-      };
+      let vald = ["image/png","image/jpg","image/jpeg",]
+      if (vald.includes(selectedFile?.type)) {        
+        const reader = new FileReader();
+        reader.readAsDataURL(selectedFile);
+        reader.onloadend = () => {
+          if (auth) {
+            // if(previewSource && fileInputState){
+  
+            dispstch(
+              uploadImages({
+                source: reader.result,
+                id: auth._id,
+                push: nevigate,
+              })
+            );
+          }
+        };
+        reader.onerror = () => {
+          console.error("AHHHHHHHH!!");
+        };
+      } else {
+        alert("This file is not supported !")
+      }
     } else {
       alert("Please select image !");
     }
   };
-  return (
-    upload.isLoading?<Loader/>:
+  return upload.isLoading ? (
+    <Loader />
+  ) : (
     <div className="py-4">
       <Row>
         <Col lg={6} md={6} sm={12} xs={12}>
@@ -89,7 +95,7 @@ export default function Upload() {
         <Col lg={6} md={6} sm={12} xs={12}>
           {previewSource && (
             <img src={previewSource} alt="chosen" style={{ height: "300px" }} />
-              )}
+          )}
         </Col>
       </Row>
     </div>
