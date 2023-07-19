@@ -21,7 +21,7 @@ export default function Home() {
   }, []);
   useEffect(() => {
     // eslint-disable-next-line
-    setImageIds(images.data|| []);
+    setImageIds(images.data || []);
   }, [images]);
 
   const handleClick = (url) => {
@@ -32,11 +32,27 @@ export default function Home() {
     const cnf = window.confirm("Are you sure to delete this image?");
     if (cnf) {
       dispatch(delImage({ public_id, id: _id, userId }));
-    const filtered =  imageIds.filter((item)=>item._id !== _id)
-    setImageIds(filtered)
+      const filtered = imageIds.filter((item) => item._id !== _id);
+      setImageIds(filtered);
     }
   };
 
+  const handleDownloadImage = (e, url) => {
+    e.preventDefault();
+    fetch(url)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "image.jpg";
+        link.click();
+        URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        console.error("Error downloading image:", error);
+      });
+  };
   return (
     <>
       {images.isLoading ? (
@@ -46,7 +62,7 @@ export default function Home() {
           className="gallery w-100"
           style={{
             gridTemplateColumns:
-             imageIds.length > 12 ? "repeat(5, 1fr)" : "repeat(4, 1fr)",
+              imageIds.length > 12 ? "repeat(5, 1fr)" : "repeat(4, 1fr)",
           }}
         >
           {imageIds && imageIds.length > 0 ? (
@@ -66,7 +82,14 @@ export default function Home() {
                  
                 /> */}
                 <div className="buttons">
-                  <Button className="cust-btn-sty fw-bold" onClick={()=>alert("This feature will come soon !")}>Download</Button>
+                  {/* <a href={imageId.image_url} download="test.jpg"> */}
+                  <Button
+                    className="cust-btn-sty fw-bold"
+                    onClick={(e) => handleDownloadImage(e, imageId.image_url)}
+                  >
+                    Download
+                  </Button>
+                  {/* </a> */}
                   <Button
                     className="cust-btn-sty fw-bold"
                     onClick={() => handleDelete(imageId)}
